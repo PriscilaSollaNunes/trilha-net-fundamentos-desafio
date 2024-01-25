@@ -1,20 +1,20 @@
-﻿using Estacionamento_DIO.Models;
-using Estacionamento_DIO.Repository;
+﻿using DesafioFundamentos.Models;
 
+// Coloca o encoding para UTF8 para exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
-EstacionamentoRepository estacionamentoRepository = new EstacionamentoRepository();
+
+decimal precoInicial = 0;
+decimal precoPorHora = 0;
 
 Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
                   "Digite o preço inicial:");
-string precoEntrada = Console.ReadLine() ?? "5";
-decimal precoInicial = Convert.ToDecimal(precoEntrada == String.Empty ? "5" : precoEntrada);
+precoInicial = Convert.ToDecimal(Console.ReadLine());
 
 Console.WriteLine("Agora digite o preço por hora:");
-string precoHora = Console.ReadLine() ?? "4";
-decimal precoPorHora = Convert.ToDecimal(precoHora == String.Empty ? "4" : precoHora);
+precoPorHora = Convert.ToDecimal(Console.ReadLine());
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-Estacionamento estacionamento = new Estacionamento(precoInicial, precoPorHora, estacionamentoRepository);
+Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
 
 string opcao = string.Empty;
 bool exibirMenu = true;
@@ -32,15 +32,15 @@ while (exibirMenu)
     switch (Console.ReadLine())
     {
         case "1":
-            estacionamento.AdicionarVeiculo();
+            es.AdicionarVeiculo();
             break;
 
         case "2":
-            estacionamento.RemoverVeiculo();
+            es.RemoverVeiculo();
             break;
 
         case "3":
-            estacionamento.ListarVeiculos();
+            es.ListarVeiculos();
             break;
 
         case "4":
@@ -52,8 +52,8 @@ while (exibirMenu)
             break;
     }
 
-    Console.WriteLine("Pressione uma tecla para continuar.");
+    Console.WriteLine("Pressione uma tecla para continuar");
     Console.ReadLine();
 }
 
-Console.WriteLine("O programa se encerrou.");
+Console.WriteLine("O programa se encerrou");
